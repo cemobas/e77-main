@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const NormalBox = ({ post }) => (
-    <a href="single.html" className="h-entry v-height gradient" style={{ backgroundImage: "url(" + post.illustration + ")" }}>
+const NormalBox = ({ post, className }) => (
+    <a href="single.html" className={className} style={{ backgroundImage: "url(" + post.illustration + ")" }}>
         <div className="text">
             <h2>{post.short}</h2>
             <span className="date">{post.date}</span>
@@ -36,15 +36,15 @@ class Main extends React.Component {
                 <div className="container">
                     <div className="row align-items-stretch retro-layout-2">
                         <div className="col-md-4">
-                            <NormalBox post={mainPosts[0]} />
-                            <NormalBox post={mainPosts[1]} />
+                            <NormalBox post={mainPosts[0]} className="h-entry mb-30 v-height gradient" />
+                            <NormalBox post={mainPosts[1]} className="h-entry v-height gradient" />
                         </div>
                         <div className="col-md-4">
                             <ExtensiveBox post={mainPosts[2]} />
                         </div>
                         <div className="col-md-4">
-                            <NormalBox post={mainPosts[3]} />
-                            <NormalBox post={mainPosts[4]} />
+                            <NormalBox post={mainPosts[3]} className="h-entry mb-30 v-height gradient" />
+                            <NormalBox post={mainPosts[4]} className="h-entry v-height gradient"/>
                         </div>
                     </div>
                 </div>
