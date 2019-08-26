@@ -1,69 +1,25 @@
 import React, {Component} from 'react';
 import Header from "./components/Header";
+import Main from "./components/Main";
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
 
   trends = [{"title": "Home", "link": "home.html"}, {"title": "Literature", "link": "literature.html"}]
-  
+  mainPosts = [
+    {"short": "Trump sert çıktı!", "illustration": "images/trump.jpg", "date": "2019-12-12", "tags": ["trump", "abd"]},
+    {"short": "React is brillant", "illustration": "images/react.jpg", "date": "2019-12-11", "tags": ["react", "js"]},
+    {"short": "Koltuk almak zor iş", "illustration": "images/koltuk.jpg", "date": "2019-12-10", "tags": ["koltuk", "mobilya"]},
+    {"short": "TV bakıyoruz...", "illustration": "images/television.jpg", "date": "2019-12-09", "tags": ["hd", "tv"]},
+    {"short": "Master Chef'te skandal", "illustration": "images/chef.jpg", "date": "2019-12-08", "tags": ["master chef", "cullinary"]}
+  ];
   render() {
     return (
       <div className="site-wrap">
         
         <Header trends={this.trends} />
-        
-        <div className="site-section bg-light">
-          <div className="container">
-            <div className="row align-items-stretch retro-layout-2">
-              <div className="col-md-4">
-                <a href="single.html" className="h-entry mb-30 v-height gradient" style={{backgroundImage: "url('images/img_1.jpg')"}}>
-                  
-                  <div className="text">
-                    <h2>The AI magically removes moving objects from videos.</h2>
-                    <span className="date">July 19, 2019</span>
-                  </div>
-                </a>
-                <a href="single.html" className="h-entry v-height gradient" style={{backgroundImage: "url('images/img_2.jpg')"}}>
-                  
-                  <div className="text">
-                    <h2>The AI magically removes moving objects from videos.</h2>
-                    <span className="date">July 19, 2019</span>
-                  </div>
-                </a>
-              </div>
-              <div className="col-md-4">
-                <a href="single.html" className="h-entry img-5 h-100 gradient" style={{backgroundImage: "url('images/img_v_1.jpg')"}}>
-                  
-                  <div className="text">
-                    <div className="post-categories mb-3">
-                      <span className="post-category bg-danger">Travel</span>
-                      <span className="post-category bg-primary">Food</span>
-                    </div>
-                    <h2>The AI magically removes moving objects from videos.</h2>
-                    <span className="date">July 19, 2019</span>
-                  </div>
-                </a>
-              </div>
-              <div className="col-md-4">
-                <a href="single.html" className="h-entry mb-30 v-height gradient" style={{backgroundImage: "url('images/img_3.jpg')"}}>
-                  
-                  <div className="text">
-                    <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                    <span className="date">July 19, 2019</span>
-                  </div>
-                </a>
-                <a href="single.html" className="h-entry v-height gradient" style={{backgroundImage: "url('images/img_4.jpg')"}}>
-                  
-                  <div className="text">
-                    <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                    <span className="date">July 19, 2019</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Main mainPosts={this.mainPosts} />
 
         <div className="site-section">
           <div className="container">
@@ -79,7 +35,7 @@ class App extends Component {
                   <div className="excerpt">
                   <span className="post-category text-white bg-secondary mb-3">Politics</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">6 The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
                       <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -101,7 +57,7 @@ class App extends Component {
                   <div className="excerpt">
                     <span className="post-category text-white bg-success mb-3">Nature</span>
 
-                    <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                    <h2><a href="single.html">7 The AI magically removes moving objects from videos.</a></h2>
                     <div className="post-meta align-items-center text-left clearfix">
                       <figure className="author-figure mb-0 mr-3 float-left">
                         <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -121,7 +77,7 @@ class App extends Component {
                   <div className="excerpt">
                   <span className="post-category text-white bg-warning mb-3">Travel</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">8 The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
                       <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -143,7 +99,7 @@ class App extends Component {
                   <div className="excerpt">
                   <span className="post-category text-white bg-secondary mb-3">Politics</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">9 The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
                       <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -165,7 +121,7 @@ class App extends Component {
                   <div className="excerpt">
                   <span className="post-category text-white bg-success mb-3">Nature</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">10 The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
                       <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -187,7 +143,7 @@ class App extends Component {
                   <div className="excerpt">
                   <span className="post-category text-white bg-danger mb-3">Sports</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">11The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
                       <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -211,7 +167,7 @@ class App extends Component {
                   <div className="excerpt">
                   <span className="post-category text-white bg-success mb-3">Nature</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">12 The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
                       <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -234,7 +190,7 @@ class App extends Component {
                   <span className="post-category text-white bg-danger mb-3">Sports</span>
                   <span className="post-category text-white bg-secondary mb-3">Tech</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">13 The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
                       <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
@@ -254,7 +210,7 @@ class App extends Component {
                   <span className="post-category text-white bg-danger mb-3">Sports</span>
                   <span className="post-category text-white bg-warning mb-3">Lifestyle</span>
 
-                  <h2><a href="single.html">The AI magically removes moving objects from videos.</a></h2>
+                  <h2><a href="single.html">14 The AI magically removes moving objects from videos.</a></h2>
                   <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left"><img src="images/person_1.jpg" alt="Image" className="img-fluid" /></figure>
                     <span className="d-inline-block mt-1">By <a href="#">Carrol Atkinson</a></span>
