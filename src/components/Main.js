@@ -11,16 +11,16 @@ const NormalBox = ({ post, className }) => (
 )
 
 const ExtensiveBox = ({ post }) => (
-        <a href="single.html" className="h-entry img-5 h-100 gradient" style={{ backgroundImage: "url(" + post.illustration + ")" }}>
-            <div className="text">
-                <div className="post-categories mb-3">
-                    <span className="post-category bg-danger">{post.tags[0]}</span>
-                    <span className="post-category bg-primary">{post.tags[1]}</span>
-                </div>
-                <h2>{post.short}</h2>
-                <span className="date">{post.date}</span>
+    <a href="single.html" className="h-entry img-5 h-100 gradient" style={{ backgroundImage: "url(" + post.illustration + ")" }}>
+        <div className="text">
+            <div className="post-categories mb-3">
+                <span className="post-category bg-danger">{post.tags[0]}</span>
+                <span className="post-category bg-primary">{post.tags[1]}</span>
             </div>
-        </a>
+            <h2>{post.short}</h2>
+            <span className="date">{post.date}</span>
+        </div>
+    </a>
 )
 
 class Main extends React.Component {
@@ -44,7 +44,7 @@ class Main extends React.Component {
                         </div>
                         <div className="col-md-4">
                             <NormalBox post={mainPosts[3]} className="h-entry mb-30 v-height gradient" />
-                            <NormalBox post={mainPosts[4]} className="h-entry v-height gradient"/>
+                            <NormalBox post={mainPosts[4]} className="h-entry v-height gradient" />
                         </div>
                     </div>
                 </div>
