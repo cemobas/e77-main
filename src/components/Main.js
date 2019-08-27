@@ -30,21 +30,36 @@ class Main extends React.Component {
     }
 
     render() {
-        const { mainPosts } = this.props
+        const { mainPosts } = this.props;
         return (
             <div className="site-section bg-light">
                 <div className="container">
                     <div className="row align-items-stretch retro-layout-2">
                         <div className="col-md-4">
-                            <NormalBox post={mainPosts[0]} className="h-entry mb-30 v-height gradient" />
-                            <NormalBox post={mainPosts[1]} className="h-entry v-height gradient" />
+                            {
+                                mainPosts.slice(0, 2).map((p, i) => {
+                                    return <NormalBox post={p} className={"h-entry " + (i % 2 == 0 ? "mb-30" : " ") + "v-height gradient"} />
+                                })
+                            }
                         </div>
                         <div className="col-md-4">
-                            <ExtensiveBox post={mainPosts[2]} />
+                            {
+                                mainPosts.slice(2, 3).map(p => {
+                                    return <ExtensiveBox post={p} />
+                                })
+                            }
                         </div>
                         <div className="col-md-4">
-                            <NormalBox post={mainPosts[3]} className="h-entry mb-30 v-height gradient" />
-                            <NormalBox post={mainPosts[4]} className="h-entry v-height gradient" />
+                            {
+                                mainPosts.slice(3, 4).map(p => {
+                                    return <NormalBox post={p} className="h-entry mb-30 v-height gradient" />
+                                })
+                            }
+                            {
+                                mainPosts.slice(4, 5).map(p => {
+                                    return <NormalBox post={p} className="h-entry v-height gradient" />
+                                })
+                            }
                         </div>
                     </div>
                 </div>

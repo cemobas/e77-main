@@ -1,35 +1,57 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Recent from "./components/Recent";
-import logo from './logo.svg';
+import { getMainData, getRecentData } from './api/postApi';
 import './App.css';
 
 class App extends Component {
 
-  trends = [{"title": "Home", "link": "home.html"}, {"title": "Literature", "link": "literature.html"}]
-  mainPosts = [
-    {"title": "Trump sert çıktı!", "theme": "Politics", "short": "Trump muthis bir adam, diye soze baslayan Macron, konusmanin gerisinde zehir zemberek konustu.", "illustration": "images/trump.jpg", "date": "2019-12-12", "tags": ["trump", "abd"]},
-    {"title": "React is brillant", "theme": "Technology", "short": "React is so great that you can build websites in about ten minutes!", "illustration": "images/react.jpg", "date": "2019-12-11", "tags": ["react", "js"]},
-    {"title": "Koltuk almak zor iş", "theme": "Furniture", "short": "Bugün mobilya dünyasında büyük bir kaos var, koltuk almak için yüz elli dükkan dolaşıyoruz.", "illustration": "images/koltuk.jpg", "date": "2019-12-10", "tags": ["koltuk", "mobilya"]},
-    {"title": "TV bakıyoruz...", "theme": "Electronics", "short": "Film izlemek, dizi izlemek için farklı TVler almanız gerekebilir.", "illustration": "images/television.jpg", "date": "2019-12-09", "tags": ["hd", "tv"]},
-    {"title": "Master Chef'te skandal", "theme": "Entertainment", "short": "Ünlü yemek programında dün akşam yaşananlar utanç vericiydi.", "illustration": "images/chef.jpg", "date": "2019-12-08", "tags": ["master chef", "cullinary"]}
-  ];
+  trends = [{ "title": "Home", "link": "home.html" }, { "title": "Literature", "link": "literature.html" }]
+
+  constructor() {
+    super();
+    this.state = {
+      recentIndex: 0,
+      recentCap: 9,
+      mainPosts: [],
+      recentPosts: []
+    }
+  }
+
+  componentDidMount() {
+    getMainData().then((res) => {
+      this.setState({
+        mainPosts: res.data,
+      });
+    }).catch((error) => {
+      console.log(error.response);
+    });
+
+    getRecentData(this.state.recentIndex * this.state.recentCap, (this.state.recentIndex + 1) * this.state.recentCap)
+      .then((res) => {
+        this.setState({
+          recentPosts: res.data,
+        });
+      }).catch((error) => {
+        console.log(error.response);
+      });
+  }
+
   render() {
     return (
       <div className="site-wrap">
-        
         <Header trends={this.trends} />
-        <Main mainPosts={this.mainPosts} />
-        <Recent recentPosts={this.mainPosts} />
-        
+        <Main mainPosts={this.state.mainPosts} />
+        <Recent recentPosts={this.state.recentPosts} />
+
         <div className="site-section bg-light">
           <div className="container">
 
             <div className="row align-items-stretch retro-layout">
-              
+
               <div className="col-md-5 order-md-2">
-                <a href="single.html" className="hentry img-1 h-100 gradient" style={{backgroundImage: "url('images/img_4.jpg')"}}>
+                <a href="single.html" className="hentry img-1 h-100 gradient" style={{ backgroundImage: "url('images/img_4.jpg')" }}>
                   <span className="post-category text-white bg-danger">Travel</span>
                   <div className="text">
                     <h2>The 20 Biggest Fintech Companies In America 2019</h2>
@@ -39,32 +61,32 @@ class App extends Component {
               </div>
 
               <div className="col-md-7">
-                
-                <a href="single.html" className="hentry img-2 v-height mb30 gradient" style={{backgroundImage: "url('images/img_1.jpg')"}}>
+
+                <a href="single.html" className="hentry img-2 v-height mb30 gradient" style={{ backgroundImage: "url('images/img_1.jpg')" }}>
                   <span className="post-category text-white bg-success">Nature</span>
                   <div className="text text-sm">
                     <h2>The 20 Biggest Fintech Companies In America 2019</h2>
                     <span>February 12, 2019</span>
                   </div>
                 </a>
-                
+
                 <div className="two-col d-block d-md-flex">
-                  <a href="single.html" className="hentry v-height img-2 gradient" style={{backgroundImage: "url('images/img_2.jpg')"}}>
+                  <a href="single.html" className="hentry v-height img-2 gradient" style={{ backgroundImage: "url('images/img_2.jpg')" }}>
                     <span className="post-category text-white bg-primary">Sports</span>
                     <div className="text text-sm">
                       <h2>The 20 Biggest Fintech Companies In America 2019</h2>
                       <span>February 12, 2019</span>
                     </div>
                   </a>
-                  <a href="single.html" className="hentry v-height img-2 ml-auto gradient" style={{backgroundImage: "url('images/img_3.jpg')"}}>
+                  <a href="single.html" className="hentry v-height img-2 ml-auto gradient" style={{ backgroundImage: "url('images/img_3.jpg')" }}>
                     <span className="post-category text-white bg-warning">Lifestyle</span>
                     <div className="text text-sm">
                       <h2>The 20 Biggest Fintech Companies In America 2019</h2>
                       <span>February 12, 2019</span>
                     </div>
                   </a>
-                </div>  
-                
+                </div>
+
               </div>
             </div>
 
@@ -88,8 +110,8 @@ class App extends Component {
             </div>
           </div>
         </div>
-        
-        
+
+
         <div className="site-footer">
           <div className="container">
             <div className="row mb-5">
@@ -112,7 +134,7 @@ class App extends Component {
                 </ul>
               </div>
               <div className="col-md-4">
-                
+
 
                 <div>
                   <h3 className="footer-heading mb-4">Connect With Us</h3>
@@ -130,15 +152,25 @@ class App extends Component {
               <div className="col-12 text-center">
                 <p>
                   Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i className="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-                  </p>
+                </p>
               </div>
             </div>
           </div>
         </div>
-        
+
       </div>
     );
   }
 }
 
 export default App;
+
+/**
+ * mainPosts = [
+    { "title": "Trump sert çıktı!", "theme": "Politics", "short": "Trump muthis bir adam, diye soze baslayan Macron, konusmanin gerisinde zehir zemberek konustu.", "illustration": "images/trump.jpg", "date": "2019-12-12", "tags": ["trump", "abd"] },
+    { "title": "React is brillant", "theme": "Technology", "short": "React is so great that you can build websites in about ten minutes!", "illustration": "images/react.jpg", "date": "2019-12-11", "tags": ["react", "js"] },
+    { "title": "Koltuk almak zor iş", "theme": "Furniture", "short": "Bugün mobilya dünyasında büyük bir kaos var, koltuk almak için yüz elli dükkan dolaşıyoruz.", "illustration": "images/koltuk.jpg", "date": "2019-12-10", "tags": ["koltuk", "mobilya"] },
+    { "title": "TV bakıyoruz...", "theme": "Electronics", "short": "Film izlemek, dizi izlemek için farklı TVler almanız gerekebilir.", "illustration": "images/television.jpg", "date": "2019-12-09", "tags": ["hd", "tv"] },
+    { "title": "Master Chef'te skandal", "theme": "Entertainment", "short": "Ünlü yemek programında dün akşam yaşananlar utanç vericiydi.", "illustration": "images/chef.jpg", "date": "2019-12-08", "tags": ["master chef", "cullinary"] }
+  ];
+ */

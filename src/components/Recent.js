@@ -50,6 +50,12 @@ class Recent extends React.Component {
     constructor(props) {
         super(props);
     }
+	
+	/* updateRecentPage = (i) => {
+		this.setState(prevState => ({
+			recentIndex: i
+		}))
+	} */
 
     render() {
         const { recentPosts } = this.props
