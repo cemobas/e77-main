@@ -38,7 +38,7 @@ class Main extends React.Component {
                         <div className="col-md-4">
                             {
                                 mainPosts.slice(0, 2).map((p, i) => {
-                                    return <NormalBox post={p} className={"h-entry " + (i % 2 == 0 ? "mb-30" : " ") + "v-height gradient"} />
+                                    return <NormalBox post={p} className={"h-entry " + (i % 2 === 0 ? "mb-30 " : " ") + "v-height gradient"} />
                                 })
                             }
                         </div>
