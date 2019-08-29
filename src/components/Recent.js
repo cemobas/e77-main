@@ -47,43 +47,45 @@ const Row = ({ posts }) => (
 
 class Recent extends React.Component {
 
-    constructor(props) {
-        super(props);
+    componentDidMount() {
+        this.setState({
+            index: this.props.index
+        });
     }
-	
-	/* updateRecentPage = (i) => {
-		this.setState(prevState => ({
-			recentIndex: i
-		}))
-	} */
+
+    updateRecentPage = (i, last) => () => {
+        this.setState({
+            index: i
+        });
+    }
 
     render() {
-        const { recentPosts } = this.props
+        const { index, posts, postCount } = this.props;
         return (
             <div className="site-section">
                 <div className="container">
-                    <Row posts={recentPosts} />
+                    <Row posts={posts} />
                     <div className="row text-center pt-5 border-top">
                         <div className="col-md-12">
                             <div className="custom-pagination">
-                                <span>1</span>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <span>...</span>
-                                <a href="#">15</a>
+                                {
+                                    Array.from(Array(Math.ceil(postCount / 9)), (e, i) => 
+                                        i === this.state.index ? <span>{i + 1}</span> : <a onClick={this.updateRecentPage(i)} style={{ color: "white" }}>{i + 1}</a>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         )
     }
 }
 
 Recent.propTypes = {
-    recentPosts: PropTypes.array
+    index: PropTypes.number,
+    posts: PropTypes.array,
+    postCount: PropTypes.number
 }
 
 export default Recent
