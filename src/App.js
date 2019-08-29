@@ -10,15 +10,9 @@ class App extends Component {
 
   trends = [{ "title": "Home", "link": "home.html" }, { "title": "Literature", "link": "literature.html" }]
 
-  constructor() {
-    super();
-    this.state = {
-      recentIndex: 0,
-      recentCap: 9,
-      postCount: 0,
-      mainPosts: [],
-      recentPosts: []
-    }
+  state = {
+    postCount: 0,
+    mainPosts: []
   }
 
   componentDidMount() {
@@ -31,15 +25,6 @@ class App extends Component {
       }).catch((error) => {
         console.log(error.response);
       });
-
-    getRecentData(this.state.recentIndex * this.state.recentCap, (this.state.recentIndex + 1) * this.state.recentCap)
-      .then((res) => {
-        this.setState({
-          recentPosts: res.data,
-        });
-      }).catch((error) => {
-        console.log(error.response);
-      });
   }
 
   render() {
@@ -47,7 +32,7 @@ class App extends Component {
       <div className="site-wrap">
         <Header trends={this.trends} />
         <Main mainPosts={this.state.mainPosts} />
-        <Recent index={this.state.recentIndex} posts={this.state.recentPosts} postCount={this.state.postCount} />
+        <Recent postCount={this.state.postCount} />
         <Random />
 
         <div className="site-section bg-lightx">

@@ -1,5 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { getRecentData } from '../api/postApi'
 
 const Box = ({ post }) => (
     <div className="col-lg-4 mb-4">
@@ -46,31 +47,52 @@ const Row = ({ posts }) => (
 )
 
 class Recent extends React.Component {
-
-    componentDidMount() {
-        this.setState({
-            index: this.props.index
-        });
+    
+    state = {
+      index: 0,
+      cap: 9,
+      posts: []
     }
 
-    updateRecentPage = (i, last) => () => {
-        this.setState({
-            index: i
-        });
+    componentDidMount() {
+        getRecentData(this.state.index * this.state.cap, (this.state.index + 1) * this.state.cap)
+            .then((res) => {
+                this.setState({
+                    index: this.state.index,
+                    posts: res.data,
+                });
+            }).catch((error) => {
+                console.log(error.response);
+            });
+    }
+
+    updateRecentPage = (i, cap) => () => {
+        console.log("data is being fetched ...");
+        getRecentData(i * cap, (i + 1) * cap)
+            .then((res) => {
+                console.log("res is here ...");
+                this.setState({
+                    index: i,
+                    posts: res.data
+                });
+                console.log("posts and index updated. index: " + this.state.index + " posts length: " + this.state.posts.length);
+            }).catch((error) => {
+                console.log(error.response);
+            });
     }
 
     render() {
-        const { index, posts, postCount } = this.props;
+        const { postCount } = this.props;
         return (
             <div className="site-section">
                 <div className="container">
-                    <Row posts={posts} />
+                    <Row posts={this.state.posts} />
                     <div className="row text-center pt-5 border-top">
                         <div className="col-md-12">
                             <div className="custom-pagination">
                                 {
                                     Array.from(Array(Math.ceil(postCount / 9)), (e, i) => 
-                                        i === this.state.index ? <span>{i + 1}</span> : <a onClick={this.updateRecentPage(i)} style={{ color: "white" }}>{i + 1}</a>
+                                        i === this.state.index ? <span>{i + 1}</span> : <a onClick={this.updateRecentPage(i, this.state.cap)} style={{ color: "white" }}>{i + 1}</a>
                                     )
                                 }
                             </div>
@@ -83,9 +105,7 @@ class Recent extends React.Component {
 }
 
 Recent.propTypes = {
-    index: PropTypes.number,
-    posts: PropTypes.array,
-    postCount: PropTypes.number
+    cap: PropTypes.number
 }
 
 export default Recent
