@@ -36,9 +36,9 @@ const Row = ({ posts }) => (
         </div>
         <div className="row">
             {
-                posts.map((post) => {
+                posts.map((post, i) => {
                     return (
-                        <Box post={post} />
+                        <Box key={i} post={post} />
                     )
                 })
             }
@@ -92,7 +92,7 @@ class Recent extends React.Component {
                             <div className="custom-pagination">
                                 {
                                     Array.from(Array(Math.ceil(postCount / 9)), (e, i) => 
-                                        i === this.state.index ? <span>{i + 1}</span> : <a onClick={this.updateRecentPage(i, this.state.cap)} style={{ color: "white" }}>{i + 1}</a>
+                                        i === this.state.index ? <span key={i}>{i + 1}</span> : <a key={i} onClick={this.updateRecentPage(i, this.state.cap)} style={{ color: "white" }}>{i + 1}</a>
                                     )
                                 }
                             </div>

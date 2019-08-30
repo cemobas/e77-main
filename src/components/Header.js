@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Trend = ({ trends }) => (
+const Trend = ({ trends, navigate }) => (
     <ul className="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
         {
             trends.map((trend, i) => {
+                console.log(`Trend ${trend.title} is being rendered.`);
                 return (
-                    <li><a href={trend.link}>{trend.title}</a></li>
+                    <li key={i}><a onClick={navigate(trend.title)}>{trend.title}</a></li>
                 )
             })
         }
@@ -16,12 +17,9 @@ const Trend = ({ trends }) => (
 
 class Header extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        const { trends } = this.props
+        const { trends, navigate } = this.props;
+        console.log(`Header is being rendered.`);
         return (
             <div>
                 <div className="site-mobile-menu">
@@ -50,7 +48,7 @@ class Header extends React.Component {
 
                             <div className="col-8 text-right">
                                 <nav className="site-navigation" role="navigation">
-                                    <Trend trends={trends} />
+                                    <Trend trends={trends} navigate={navigate} />
                                 </nav>
                                 <a href="#" className="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span className="icon-menu h3"></span></a></div>
                         </div>
@@ -63,7 +61,8 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-    trends: PropTypes.array
+    trends: PropTypes.array,
+    navigate: PropTypes.func
 }
 
 export default Header
