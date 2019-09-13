@@ -5,12 +5,13 @@ import Recent from "./components/Recent";
 import Random from "./components/Random";
 import Footer from "./components/Footer";
 import Newsletter from "./components/Newsletter";
+import Article from "./components/Article";
 import { getMainData } from './api/postApi';
 import './App.css';
 
 class App extends Component {
 
-  trends = [{ "title": "Home" }, { "title": "Technology" }]
+  trends = [{ "title": "Home" }, { "title": "Technology" }, { "title": "Article" }]
 
   state = {
     page: 'Home',
@@ -45,18 +46,33 @@ class App extends Component {
         <Header trends={this.trends} navigate={this.navigate.bind(this)} />
         <Main mainPosts={this.state.mainPosts} />
         <Recent postCount={this.state.postCount} />
-        <Random />
+        {/** Random component withdrawn */}
         <Newsletter />
         <Footer />
       </div>
     );
   }
-
+  
   tech = () => {
     console.log(`tech is being rendered.`);
     return (
       <div className="site-wrap">
+        <Header trends={this.trends} navigate={this.navigate.bind(this)} />
         <div>Bir tech dilegim var, mutlu ol yeter.</div>
+        <Newsletter />
+        <Footer />
+      </div>
+    );
+  }
+  
+  article = () => {
+    console.log(`article is being rendered.`);
+    return (
+        <div className="site-wrap">
+        <Header trends={this.trends} navigate={this.navigate.bind(this)} />
+        <Article />
+        <Newsletter />
+        <Footer />
       </div>
     );
   }
@@ -68,6 +84,8 @@ class App extends Component {
           return this.home();
         case 'Technology':
           return this.tech();
+        case 'Article':
+          return this.article();
         default:
           return <h1>No project match</h1>;
       }

@@ -16,3 +16,11 @@ export const getRecentData = (start, end) =>
   }).catch((error) => {
     console.log(error.response);
   });
+  
+export const getThemeData = (start, end) =>
+  axios.get(`${config.serverUrl}/themes`, {})
+    .then((res) => {
+      return res;
+  }).catch((error) => {
+    console.log(error.response);
+  });

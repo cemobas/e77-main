@@ -47,11 +47,11 @@ const Row = ({ posts }) => (
 )
 
 class Recent extends React.Component {
-    
+
     state = {
-      index: 0,
-      cap: 9,
-      posts: []
+        index: 0,
+        cap: 9,
+        posts: []
     }
 
     componentDidMount() {
@@ -91,7 +91,7 @@ class Recent extends React.Component {
                         <div className="col-md-12">
                             <div className="custom-pagination">
                                 {
-                                    Array.from(Array(Math.ceil(postCount / 9)), (e, i) => 
+                                    Array.from(Array(Math.ceil(postCount / 9)), (e, i) =>
                                         i === this.state.index ? <span key={i}>{i + 1}</span> : <a key={i} onClick={this.updateRecentPage(i, this.state.cap)} style={{ color: "white" }}>{i + 1}</a>
                                     )
                                 }

@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { getThemeData } from '../api/postApi'
 
 const Trend = ({ trends, navigate }) => (
     <ul className="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
         {
             trends.map((trend, i) => {
-                console.log(`Trend ${trend.title} is being rendered.`);
+                console.log(`Trend ${trend._id} is being rendered.`);
                 return (
-                    <li key={i}><a onClick={navigate(trend.title)}>{trend.title}</a></li>
+                    <li key={i}><a onClick={navigate(trend._id)}>{trend._id}</a></li>
                 )
             })
         }
@@ -16,9 +17,25 @@ const Trend = ({ trends, navigate }) => (
 )
 
 class Header extends React.Component {
+    
+    state = {
+        trends: []
+    }
+
+    componentDidMount() {
+        getThemeData()
+            .then((res) => {
+                console.log(`Retrieving themes for navbar...`);
+                this.setState({
+                    trends: res.data
+                });
+            }).catch((error) => {
+                console.log(error.response);
+            });
+    }
 
     render() {
-        const { trends, navigate } = this.props;
+        const { navigate } = this.props;
         console.log(`Header is being rendered.`);
         return (
             <div>
@@ -48,7 +65,7 @@ class Header extends React.Component {
 
                             <div className="col-8 text-right">
                                 <nav className="site-navigation" role="navigation">
-                                    <Trend trends={trends} navigate={navigate} />
+                                    <Trend trends={this.state.trends} navigate={navigate} />
                                 </nav>
                                 <a href="#" className="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span className="icon-menu h3"></span></a></div>
                         </div>
@@ -61,7 +78,6 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-    trends: PropTypes.array,
     navigate: PropTypes.func
 }
 
