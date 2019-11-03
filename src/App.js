@@ -11,8 +11,6 @@ import './App.css';
 
 class App extends Component {
 
-  trends = [{ "title": "Home" }, { "title": "Technology" }, { "title": "Article" }]
-
   state = {
     page: 'Home',
     postCount: 0,
@@ -31,11 +29,19 @@ class App extends Component {
         console.log(error.response);
       });
   }
-
+  
   navigate = (newPage) => () => {
     console.log(`Navigating to ${newPage}`);
     this.setState({
-      page: newPage
+      newPage: newPage
+    });
+  }
+    
+  openArticle = (articleId) => () => {
+    console.log(`Navigating to Article with _id: ${articleId}`);
+    this.setState({
+      page: 'Article',
+      articleId: articleId
     });
   }
 
@@ -43,8 +49,8 @@ class App extends Component {
     console.log(`home is being rendered.`);
     return (
       <div className="site-wrap">
-        <Header trends={this.trends} navigate={this.navigate.bind(this)} />
-        <Main mainPosts={this.state.mainPosts} />
+        <Header navigate={this.navigate.bind(this)} />
+        <Main mainPosts={this.state.mainPosts} openArticle={this.openArticle.bind(this)} />
         <Recent postCount={this.state.postCount} />
         {/** Random component withdrawn */}
         <Newsletter />
@@ -57,7 +63,7 @@ class App extends Component {
     console.log(`tech is being rendered.`);
     return (
       <div className="site-wrap">
-        <Header trends={this.trends} navigate={this.navigate.bind(this)} />
+        <Header navigate={this.navigate.bind(this)} />
         <div>Bir tech dilegim var, mutlu ol yeter.</div>
         <Newsletter />
         <Footer />
@@ -66,11 +72,11 @@ class App extends Component {
   }
   
   article = () => {
-    console.log(`article is being rendered.`);
+    console.log(`Placeholder article is being rendered.`);
     return (
         <div className="site-wrap">
-        <Header trends={this.trends} navigate={this.navigate.bind(this)} />
-        <Article />
+        <Header navigate={this.navigate.bind(this)} />
+        <Article articleId={this.state.articleId} navigate={this.navigate.bind(this)} />
         <Newsletter />
         <Footer />
       </div>
@@ -87,7 +93,7 @@ class App extends Component {
         case 'Article':
           return this.article();
         default:
-          return <h1>No project match</h1>;
+          return this.home();
       }
   }
 }

@@ -17,8 +17,16 @@ export const getRecentData = (start, end) =>
     console.log(error.response);
   });
   
-export const getThemeData = (start, end) =>
+export const getThemeData = () =>
   axios.get(`${config.serverUrl}/themes`, {})
+    .then((res) => {
+      return res;
+  }).catch((error) => {
+    console.log(error.response);
+  });
+  
+export const getArticle = (articleId) =>
+  axios.get(`${config.serverUrl}/posts/${articleId}`, {})
     .then((res) => {
       return res;
   }).catch((error) => {
