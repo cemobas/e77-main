@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import dateFormat from 'dateformat';
+import { getArticleImgUrlById } from "../utils/Constants.js"
 
 const NormalBox = ({ id, post, className, openArticle }) => (
-    <a key={id} onClick={openArticle(post._id)} className={className} style={{ backgroundImage: "url(" + post.illustration + ")" }}>
+    <a key={id} onClick={openArticle(post._id)} className={className} style={{ backgroundImage: getArticleImgUrlById(post._id, 99) }}>
         <div className="text">
             <h2>{post.short}</h2>
             <span className="date">{ dateFormat(post.date, "dddd, mmmm dS") }</span>
@@ -12,7 +13,7 @@ const NormalBox = ({ id, post, className, openArticle }) => (
 )
 
 const ExtensiveBox = ({ id, post, openArticle }) => (
-    <a key={id} onClick={openArticle(post._id)} className="h-entry img-5 h-100 gradient" style={{ backgroundImage: "url(" + post.illustration + ")" }}>
+    <a key={id} onClick={openArticle(post._id)} className="h-entry img-5 h-100 gradient" style={{ backgroundImage: getArticleImgUrlById(post._id, 99) }}>
         <div className="text">
             <div className="post-categories mb-3">
                 <span className="post-category bg-danger">{post.tags[0]}</span>

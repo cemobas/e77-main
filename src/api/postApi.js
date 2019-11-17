@@ -32,3 +32,11 @@ export const getArticle = (articleId) =>
   }).catch((error) => {
     console.log(error.response);
   });
+  
+export const getAuthor = (authorId) =>
+  axios.get(`${config.serverUrl}/authors/${authorId}`, {})
+    .then((res) => {
+      return res;
+  }).catch((error) => {
+    console.log(error.response);
+  });
