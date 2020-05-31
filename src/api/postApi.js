@@ -1,8 +1,10 @@
-import config from './config';
+ /** import config from './config'; */
 import axios from 'axios';
 
+const uri = process.env.REACT_APP_E77SRV_URI || 'http://localhost:8089';
+
 export const getMainData = () =>
-  axios.get(`${config.serverUrl}/posts`, {})
+  axios.get(`${uri}/posts`, {})
     .then((res) => {
       return res;
   }).catch((error) => {
@@ -10,16 +12,16 @@ export const getMainData = () =>
   });
   
 export const getRecentData = (start, end) =>
-  axios.get(`${config.serverUrl}/latestPosts/${start}/${end}`, {})
+  axios.get(`${uri}/latestPosts/${start}/${end}`, {})
     .then((res) => {
-      console.log(`Response is here for: ${config.serverUrl}/latestPosts/${start}/${end}`);
+      console.log(`Response is here for: ${uri}/latestPosts/${start}/${end}`);
       return res;
   }).catch((error) => {
     console.log(error.response);
   });
   
 export const getThemeData = () =>
-  axios.get(`${config.serverUrl}/themes`, {})
+  axios.get(`${uri}/themes`, {})
     .then((res) => {
       return res;
   }).catch((error) => {
@@ -27,7 +29,7 @@ export const getThemeData = () =>
   });
   
 export const getArticle = (articleId) =>
-  axios.get(`${config.serverUrl}/posts/${articleId}`, {})
+  axios.get(`${uri}/posts/${articleId}`, {})
     .then((res) => {
       console.log("postApi.js: Searching for article with articleId: " + articleId);
       return res;
@@ -36,7 +38,7 @@ export const getArticle = (articleId) =>
   });
   
 export const getAuthor = (nickname) =>
-  axios.get(`${config.serverUrl}/authors/${nickname}`, {})
+  axios.get(`${uri}/authors/${nickname}`, {})
     .then((res) => {
       console.log("postApi.js: Searching for nickname: " + nickname);
       return res;
