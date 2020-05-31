@@ -25,6 +25,7 @@ class App extends Component {
           postCount: res.data.length,
           page: 'Home'
         });
+        console.log(`Main posts length: ${this.state.mainPosts.length}`);
       }).catch((error) => {
         console.log(error.response);
       });
@@ -38,7 +39,7 @@ class App extends Component {
   }
     
   openArticle = (articleId) => () => {
-    console.log(`Navigating to Article with _id: ${articleId}`);
+    console.log(`Navigating to Article with article index: ${articleId}`);
     this.setState({
       page: 'Article',
       articleId: articleId
@@ -51,9 +52,9 @@ class App extends Component {
       <div className="site-wrap">
         <Header navigate={this.navigate.bind(this)} />
         <Main mainPosts={this.state.mainPosts} openArticle={this.openArticle.bind(this)} />
-        <Recent postCount={this.state.postCount} />
-        {/** Random component withdrawn */}
-        <Newsletter />
+        <Recent postCount={this.state.postCount} openArticle={this.openArticle.bind(this)} />
+        {/** <Random /> */}
+        {/** <Newsletter /> */}
         <Footer />
       </div>
     );
@@ -65,19 +66,19 @@ class App extends Component {
       <div className="site-wrap">
         <Header navigate={this.navigate.bind(this)} />
         <div>Bir tech dilegim var, mutlu ol yeter.</div>
-        <Newsletter />
+        {/** <Newsletter /> */}
         <Footer />
       </div>
     );
   }
   
   article = () => {
-    console.log(`Placeholder article is being rendered.`);
+    console.log(`article is being rendered.`);
     return (
         <div className="site-wrap">
         <Header navigate={this.navigate.bind(this)} />
         <Article articleId={this.state.articleId} navigate={this.navigate.bind(this)} />
-        <Newsletter />
+        {/** <Newsletter /> */}
         <Footer />
       </div>
     );
@@ -99,13 +100,3 @@ class App extends Component {
 }
 
 export default App;
-
-/**
- * mainPosts = [
-    { "title": "Trump sert çıktı!", "theme": "Politics", "short": "Trump muthis bir adam, diye soze baslayan Macron, konusmanin gerisinde zehir zemberek konustu.", "illustration": "images/trump.jpg", "date": "2019-12-12", "tags": ["trump", "abd"] },
-    { "title": "React is brillant", "theme": "Technology", "short": "React is so great that you can build websites in about ten minutes!", "illustration": "images/react.jpg", "date": "2019-12-11", "tags": ["react", "js"] },
-    { "title": "Koltuk almak zor iş", "theme": "Furniture", "short": "Bugün mobilya dünyasında büyük bir kaos var, koltuk almak için yüz elli dükkan dolaşıyoruz.", "illustration": "images/koltuk.jpg", "date": "2019-12-10", "tags": ["koltuk", "mobilya"] },
-    { "title": "TV bakıyoruz...", "theme": "Electronics", "short": "Film izlemek, dizi izlemek için farklı TVler almanız gerekebilir.", "illustration": "images/television.jpg", "date": "2019-12-09", "tags": ["hd", "tv"] },
-    { "title": "Master Chef'te skandal", "theme": "Entertainment", "short": "Ünlü yemek programında dün akşam yaşananlar utanç vericiydi.", "illustration": "images/chef.jpg", "date": "2019-12-08", "tags": ["master chef", "cullinary"] }
-  ];
- */

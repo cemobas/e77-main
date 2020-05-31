@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import ArticleSide from "./ArticleSide";
-import Comments from "./Comments";
+/** import Comments from "./Comments"; */
+/** import Related from "./Related"; */
 import dateFormat from 'dateformat';
-import { getArticle, getAuthor } from '../api/postApi'
-import { getArticleImgUrlById } from "../utils/Constants.js"
+import { getArticle, getAuthor } from '../api/postApi';
+import { getArticleImgUrlById } from "../utils/Constants.js";
 
-const Categories = ({ tags }) => (
+const RelCategories = ({ tags }) => (
   <p>Categories:&nbsp;
     {
       tags.map((tag, i) => {
@@ -18,6 +19,14 @@ const Categories = ({ tags }) => (
     }
   </p>
 )
+
+const addLineBreaks = string =>
+  string.split('\n').map((text, index) => (
+    <React.Fragment key={`${text}-${index}`}>
+      {text}
+      <br />
+    </React.Fragment>
+  ));
 
 class Article extends React.Component {
   
@@ -31,13 +40,13 @@ class Article extends React.Component {
   componentDidMount() {
       getArticle(this.props.articleId)
           .then((res) => {
-              console.log(`Retrieving article with id: ${this.props.articleId}`);
+              console.log(`Article.js: Retrieving article with id: ${this.props.articleId}`);
               this.setState({
                   article: res.data
               });
-              getAuthor(this.state.article.authorId)
+              getAuthor(this.state.article.author)
                 .then((res) => {
-                    console.log(`Retrieving author with id: ${this.state.article.authorId}`);
+                    console.log(`Article.js: Retrieving author: ${this.state.article.author}`);
                     this.setState({
                         author: res.data
                     });
@@ -56,7 +65,7 @@ class Article extends React.Component {
 
     return (
       <div>
-        <div className="site-cover site-cover-sm same-height overlay single-page" style={{ backgroundImage: getArticleImgUrlById(article._id, 0) }}>
+        <div className="site-cover site-cover-sm same-height overlay single-page" style={{ backgroundImage: getArticleImgUrlById(article.index, 99) }}>
           <div className="container">
             <div className="row same-height justify-content-center">
               <div className="col-md-12 col-lg-10">
@@ -78,10 +87,10 @@ class Article extends React.Component {
             <div className="row blog-entries element-animate">
               <div className="col-md-12 col-lg-8 main-content">
                 <div className="post-content-body">
-                  {article.content}
+                  {addLineBreaks(new String(article.content))}
                 </div>
                 <div className="pt-5">
-                  <Categories tags={article.tags} />
+                  <RelCategories tags={article.tags} />
                 </div>
                 {/**<Comments />*/}
               </div>
@@ -90,60 +99,7 @@ class Article extends React.Component {
             </div>
           </div>
         </section>
-
-        <div className="site-section bg-light">
-          <div className="container">
-
-            <div className="row mb-5">
-              <div className="col-12">
-                <h2>More Related Posts</h2>
-              </div>
-            </div>
-
-            <div className="row align-items-stretch retro-layout">
-
-              <div className="col-md-5 order-md-2">
-                <a href="single.html" className="hentry img-1 h-100 gradient" style={{ backgroundImage: "url('images/img_4.jpg')" }}>
-                  <span className="post-category text-white bg-danger">Travel</span>
-                  <div className="text">
-                    <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                    <span>February 12, 2019</span>
-                  </div>
-                </a>
-              </div>
-
-              <div className="col-md-7">
-
-                <a href="single.html" className="hentry img-2 v-height mb30 gradient" style={{ backgroundImage: "url('images/img_1.jpg')" }}>
-                  <span className="post-category text-white bg-success">Nature</span>
-                  <div className="text text-sm">
-                    <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                    <span>February 12, 2019</span>
-                  </div>
-                </a>
-
-                <div className="two-col d-block d-md-flex">
-                  <a href="single.html" className="hentry v-height img-2 gradient" style={{ backgroundImage: "url('images/img_2.jpg')" }}>
-                    <span className="post-category text-white bg-primary">Sports</span>
-                    <div className="text text-sm">
-                      <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                      <span>February 12, 2019</span>
-                    </div>
-                  </a>
-                  <a href="single.html" className="hentry v-height img-2 ml-auto gradient" style={{ backgroundImage: "url('images/img_3.jpg')" }}>
-                    <span className="post-category text-white bg-warning">Lifestyle</span>
-                    <div className="text text-sm">
-                      <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                      <span>February 12, 2019</span>
-                    </div>
-                  </a>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
+        {/**<Related />*/}
       </div>
     )
   }

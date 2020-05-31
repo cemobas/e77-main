@@ -9,9 +9,8 @@ export const logStars = function(message) {
 };
 
 export default {
-  port: env.PORT || 8080,
-  host: env.HOST || '0.0.0.0',
+  uri: env.E77SRV_URI || `http://localhost:8080`,
   get serverUrl() {
-    return `http://${this.host}:${this.port}`;
+    return `${this.uri}`;
   }
 };

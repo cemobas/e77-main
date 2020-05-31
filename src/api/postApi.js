@@ -12,6 +12,7 @@ export const getMainData = () =>
 export const getRecentData = (start, end) =>
   axios.get(`${config.serverUrl}/latestPosts/${start}/${end}`, {})
     .then((res) => {
+      console.log(`Response is here for: ${config.serverUrl}/latestPosts/${start}/${end}`);
       return res;
   }).catch((error) => {
     console.log(error.response);
@@ -28,14 +29,16 @@ export const getThemeData = () =>
 export const getArticle = (articleId) =>
   axios.get(`${config.serverUrl}/posts/${articleId}`, {})
     .then((res) => {
+      console.log("postApi.js: Searching for article with articleId: " + articleId);
       return res;
   }).catch((error) => {
     console.log(error.response);
   });
   
-export const getAuthor = (authorId) =>
-  axios.get(`${config.serverUrl}/authors/${authorId}`, {})
+export const getAuthor = (nickname) =>
+  axios.get(`${config.serverUrl}/authors/${nickname}`, {})
     .then((res) => {
+      console.log("postApi.js: Searching for nickname: " + nickname);
       return res;
   }).catch((error) => {
     console.log(error.response);

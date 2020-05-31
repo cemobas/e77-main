@@ -12,7 +12,7 @@ const Trend = ({ trends, navigate }) => (
                 )
             })
         }
-        <li className="d-none d-lg-inline-block"><a href="#" className="js-search-toggle"><span className="icon-search"></span></a></li>
+        {/** <li className="d-none d-lg-inline-block"><a href="#" className="js-search-toggle"><span className="icon-search"></span></a></li>*/}
     </ul>
 )
 
@@ -60,14 +60,15 @@ class Header extends React.Component {
                             </div>
 
                             <div className="col-4 site-logo">
-                                <a href="index.html" className="text-black h2 mb-0">Mini Blog</a>
+                                <a href="index.html" className="text-black h2 mb-0">cafe e77</a>
                             </div>
 
                             <div className="col-8 text-right">
                                 <nav className="site-navigation" role="navigation">
                                     <Trend trends={this.state.trends} navigate={navigate} />
                                 </nav>
-                                <a href="#" className="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span className="icon-menu h3"></span></a></div>
+                                <a href="#" className="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span className="icon-menu h3"></span></a>
+                            </div>
                         </div>
 
                     </div>

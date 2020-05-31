@@ -1,6 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { getAuthorImgUrlById } from "../utils/Constants.js"
+import PropTypes from 'prop-types';
+/** import Popular from "./Popular"; */
+/** import Categories from "./Categories"; */
+/** import Tags from "./Tags"; */
+import { getAuthorImgUrlById } from "../utils/Constants.js";
 
 class ArticleSide extends React.Component {
   
@@ -25,7 +28,7 @@ class ArticleSide extends React.Component {
           {/**END sidebar-box*/}
           <div className="sidebar-box">
             <div className="bio text-center">
-              <img src={getAuthorImgUrlById(author._id)} alt="Image Placeholder" className="img-fluid mb-5" />
+              <img src={getAuthorImgUrlById(author.nickname)} alt={author.nickname} className="img-fluid mb-5" />
               <div className="bio-body">
                 <h2>{author.name} {author.surname}</h2>
                 <p className="mb-4">{author.shortBio}</p>
@@ -48,77 +51,11 @@ class ArticleSide extends React.Component {
             </div>
           </div>
           {/**END sidebar-box*/}
-          <div className="sidebar-box">
-            <h3 className="heading">Popular Posts</h3>
-            <div className="post-entry-sidebar">
-              <ul>
-                <li>
-                  <a href="">
-                    <img src="images/img_1.jpg" alt="Image placeholder" className="mr-4" />
-                    <div className="text">
-                      <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                      <div className="post-meta">
-                        <span className="mr-2">March 15, 2018 </span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="images/img_2.jpg" alt="Image placeholder" className="mr-4" />
-                    <div className="text">
-                      <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                      <div className="post-meta">
-                        <span className="mr-2">March 15, 2018 </span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <img src="images/img_3.jpg" alt="Image placeholder" className="mr-4" />
-                    <div className="text">
-                      <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                      <div className="post-meta">
-                        <span className="mr-2">March 15, 2018 </span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+          {/** <Popular /> */}
           {/**END sidebar-box*/}
-
-          <div className="sidebar-box">
-            <h3 className="heading">Categories</h3>
-            <ul className="categories">
-              <li><a href="#">Food <span>(12)</span></a></li>
-              <li><a href="#">Travel <span>(22)</span></a></li>
-              <li><a href="#">Lifestyle <span>(37)</span></a></li>
-              <li><a href="#">Business <span>(42)</span></a></li>
-              <li><a href="#">Adventure <span>(14)</span></a></li>
-            </ul>
-          </div>
+          {/** <Categories /> */}
           {/**END sidebar-box*/}
-
-          <div className="sidebar-box">
-            <h3 className="heading">Tags</h3>
-            <ul className="tags">
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Adventure</a></li>
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Lifestyle</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Freelancing</a></li>
-              <li><a href="#">Travel</a></li>
-              <li><a href="#">Adventure</a></li>
-              <li><a href="#">Food</a></li>
-              <li><a href="#">Lifestyle</a></li>
-              <li><a href="#">Business</a></li>
-              <li><a href="#">Freelancing</a></li>
-            </ul>
-          </div>
+          {/** <Tags /> */}
         </div>
     )
   }

@@ -1,33 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getRecentData } from '../api/postApi'
+import dateFormat from 'dateformat';
+import { getRecentData } from '../api/postApi';
+import { getArticleImgUrlById, getAuthorImgUrlById } from "../utils/Constants.js";
 
-const Box = ({ post }) => (
+const Box = ({ post, openArticle }) => (
     <div className="col-lg-4 mb-4">
         <div className="entry2">
-            <a href="single.html">
-                <img src={post.illustration} alt="img_1" className="img-fluid rounded" />
+            <a key={post.index} onClick={openArticle(post.index)}>
+                <img src={getArticleImgUrlById(post.index, 99, true)} alt={'img'+post.index} className="img-fluid rounded" />
             </a>
             <div className="excerpt">
                 <span className="post-category text-white bg-secondary mb-3">{post.theme}</span>
-
-                <h2><a href="single.html">{post.title}</a></h2>
+                <h2><a key={post.index} onClick={openArticle(post.index)}>{post.title}</a></h2>
                 <div className="post-meta align-items-center text-left clearfix">
                     <figure className="author-figure mb-0 mr-3 float-left">
-                        <img src="images/person_1.jpg" alt="person_1" className="img-fluid" />
+                        <img src={getAuthorImgUrlById(post.author)} alt="person_1" className="img-fluid" />
                     </figure>
                     <span className="d-inline-block mt-1">By <a href="#">{post.author}</a></span>
-                    <span>&nbsp;-&nbsp; {post.date}</span>
+                    <span>&nbsp;-&nbsp; {dateFormat(post.date, "dddd, mmmm dS")}</span>
                 </div>
 
                 <p>{post.short}</p>
-                <p><a href="#">Read More</a></p>
+                <p><a key={post.index} className="btn btn-link text-info" onClick={openArticle(post.index)}>Read More</a></p>
             </div>
         </div>
     </div>
 )
 
-const Row = ({ posts }) => (
+const Row = ({ posts, openArticle }) => (
     <div>
         <div className="row mb-5">
             <div className="col-12">
@@ -38,7 +39,7 @@ const Row = ({ posts }) => (
             {
                 posts.map((post, i) => {
                     return (
-                        <Box key={i} post={post} />
+                        <Box key={i} post={post} openArticle={openArticle} />
                     )
                 })
             }
@@ -67,8 +68,8 @@ class Recent extends React.Component {
     }
 
     updateRecentPage = (i, cap) => () => {
-        console.log("data is being fetched ...");
-        getRecentData(i * cap, (i + 1) * cap)
+        console.log("data is being fetched with cap: " + cap);
+        getRecentData(i * cap, 9)
             .then((res) => {
                 console.log("res is here ...");
                 this.setState({
@@ -82,11 +83,11 @@ class Recent extends React.Component {
     }
 
     render() {
-        const { postCount } = this.props;
+        const { postCount, openArticle } = this.props;
         return (
             <div className="site-section">
                 <div className="container">
-                    <Row posts={this.state.posts} />
+                    <Row posts={this.state.posts} openArticle={this.props.openArticle} />
                     <div className="row text-center pt-5 border-top">
                         <div className="col-md-12">
                             <div className="custom-pagination">
