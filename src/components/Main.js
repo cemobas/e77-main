@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
-import { getArticleImgUrlById } from "../utils/Constants.js"
+import { getArticleImgUrlById } from "../api/imageApi";
 
 const NormalBox = ({ id, post, className, openArticle }) => (
     <a key={id} onClick={openArticle(post.index)} className={className} style={{ backgroundImage: getArticleImgUrlById(post.index, 99) }}>

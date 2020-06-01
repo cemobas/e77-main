@@ -5,13 +5,12 @@ import ArticleSide from "./ArticleSide";
 /** import Related from "./Related"; */
 import dateFormat from 'dateformat';
 import { getArticle, getAuthor } from '../api/postApi';
-import { getArticleImgUrlById } from "../utils/Constants.js";
+import { getArticleImgUrlById } from "../api/imageApi";
 
 const RelCategories = ({ tags }) => (
   <p>Categories:&nbsp;
     {
       tags.map((tag, i) => {
-          console.log(`Tag ${tag} is being rendered.`);
           return (
               <span key={i}>{tag}{i<tags.length-1 ? ", " : ""}</span>
           );
@@ -40,13 +39,11 @@ class Article extends React.Component {
   componentDidMount() {
       getArticle(this.props.articleId)
           .then((res) => {
-              console.log(`Article.js: Retrieving article with id: ${this.props.articleId}`);
               this.setState({
                   article: res.data
               });
               getAuthor(this.state.article.author)
                 .then((res) => {
-                    console.log(`Article.js: Retrieving author: ${this.state.article.author}`);
                     this.setState({
                         author: res.data
                     });

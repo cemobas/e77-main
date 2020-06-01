@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 /** import Popular from "./Popular"; */
 /** import Categories from "./Categories"; */
 /** import Tags from "./Tags"; */
-import { getAuthorImgUrlById } from "../utils/Constants.js";
+import { getAuthorImgUrlById } from "../api/imageApi";
 
 class ArticleSide extends React.Component {
   

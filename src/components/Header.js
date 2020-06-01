@@ -6,7 +6,6 @@ const Trend = ({ trends, navigate }) => (
     <ul className="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
         {
             trends.map((trend, i) => {
-                console.log(`Trend ${trend._id} is being rendered.`);
                 return (
                     <li key={i}><a onClick={navigate(trend._id)}>{trend._id}</a></li>
                 )

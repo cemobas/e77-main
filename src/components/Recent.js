@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
 import { getRecentData } from '../api/postApi';
-import { getArticleImgUrlById, getAuthorImgUrlById } from "../utils/Constants.js";
+import { getArticleImgUrlById, getAuthorImgUrlById } from "../api/imageApi";
 
 const Box = ({ post, openArticle }) => (
     <div className="col-lg-4 mb-4">
@@ -68,15 +68,13 @@ class Recent extends React.Component {
     }
 
     updateRecentPage = (i, cap) => () => {
-        console.log("data is being fetched with cap: " + cap);
+        console.log(`data is being fetched with cap: ${cap}`);
         getRecentData(i * cap, 9)
             .then((res) => {
-                console.log("res is here ...");
                 this.setState({
                     index: i,
                     posts: res.data
                 });
-                console.log("posts and index updated. index: " + this.state.index + " posts length: " + this.state.posts.length);
             }).catch((error) => {
                 console.log(error.response);
             });

@@ -25,7 +25,6 @@ class App extends Component {
           postCount: res.data.length,
           page: 'Home'
         });
-        console.log(`Main posts length: ${this.state.mainPosts.length}`);
       }).catch((error) => {
         console.log(error.response);
       });
