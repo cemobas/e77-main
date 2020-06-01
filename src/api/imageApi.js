@@ -1,5 +1,5 @@
 import config from './config';
-// import {logStars} from './config.js';
+//import {logStars} from './config.js';
 
 const mediaUri = config.uri.media;
 

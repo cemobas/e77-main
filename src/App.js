@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Recent from "./components/Recent";
-import Random from "./components/Random";
+/** import Random from "./components/Random";
+import Newsletter from "./components/Newsletter"; */
 import Footer from "./components/Footer";
-import Newsletter from "./components/Newsletter";
 import Article from "./components/Article";
 import { getMainData } from './api/postApi';
 import './App.css';
@@ -64,7 +64,7 @@ class App extends Component {
     return (
       <div className="site-wrap">
         <Header navigate={this.navigate.bind(this)} />
-        <div>Bir tech dilegim var, mutlu ol yeter.</div>
+        <div>Lorem ipsum</div>
         {/** <Newsletter /> */}
         <Footer />
       </div>

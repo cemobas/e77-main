@@ -6,6 +6,7 @@ import ArticleSide from "./ArticleSide";
 import dateFormat from 'dateformat';
 import { getArticle, getAuthor } from '../api/postApi';
 import { getArticleImgUrlById } from "../api/imageApi";
+import { addImages } from "../utils/textOps";
 
 const RelCategories = ({ tags }) => (
   <p>Categories:&nbsp;
@@ -18,14 +19,6 @@ const RelCategories = ({ tags }) => (
     }
   </p>
 )
-
-const addLineBreaks = string =>
-  string.split('\n').map((text, index) => (
-    <React.Fragment key={`${text}-${index}`}>
-      {text}
-      <br />
-    </React.Fragment>
-  ));
 
 class Article extends React.Component {
   
@@ -84,7 +77,7 @@ class Article extends React.Component {
             <div className="row blog-entries element-animate">
               <div className="col-md-12 col-lg-8 main-content">
                 <div className="post-content-body">
-                  {addLineBreaks(new String(article.content))}
+                  {addImages(article.index, new String(article.content))}
                 </div>
                 <div className="pt-5">
                   <RelCategories tags={article.tags} />
