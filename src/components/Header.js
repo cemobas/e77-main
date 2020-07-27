@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { getThemeData } from '../api/postApi'
+import React from 'react';
+import { Link } from "react-router-dom";
+import { getThemeData } from '../api/postApi';
 
-const Trend = ({ trends, navigate }) => (
+const Trend = ({ trends }) => (
     <ul className="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
         {
             trends.map((trend, i) => {
                 return (
-                    <li key={i}><a onClick={navigate(trend._id)}>{trend._id}</a></li>
+                    <li key={i}><a>{trend._id}</a></li>
                 )
             })
         }
@@ -16,10 +16,6 @@ const Trend = ({ trends, navigate }) => (
 )
 
 class Header extends React.Component {
-    
-    state = {
-        trends: []
-    }
 
     componentDidMount() {
         getThemeData()
@@ -32,9 +28,12 @@ class Header extends React.Component {
                 console.log(error.response);
             });
     }
+    
+    state = {
+        trends: []
+    }
 
     render() {
-        const { navigate } = this.props;
         console.log(`Header is being rendered.`);
         return (
             <div>
@@ -59,12 +58,12 @@ class Header extends React.Component {
                             </div>
 
                             <div className="col-4 site-logo">
-                                <a href="index.html" className="text-black h2 mb-0">cafe e77</a>
+                                <Link to="/" className="text-black h2 mb-0">cafe e77</Link>
                             </div>
 
                             <div className="col-8 text-right">
                                 <nav className="site-navigation" role="navigation">
-                                    <Trend trends={this.state.trends} navigate={navigate} />
+                                    <Trend trends={this.state.trends} />
                                 </nav>
                                 <a href="#" className="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span className="icon-menu h3"></span></a>
                             </div>
@@ -75,10 +74,6 @@ class Header extends React.Component {
             </div>
         )
     }
-}
-
-Header.propTypes = {
-    navigate: PropTypes.func
 }
 
 export default Header

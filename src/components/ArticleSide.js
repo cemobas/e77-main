@@ -6,15 +6,9 @@ import PropTypes from 'prop-types';
 import { getAuthorImgUrlById } from "../api/imageApi";
 
 class ArticleSide extends React.Component {
-  
-  state = {
-    article: {
-      tags: []
-    }
-  }
 
   render() {
-    const {article, author, navigate} = this.props;
+    const {article, author} = this.props;
     return (
         <div className="col-md-12 col-lg-4 sidebar">
           <div className="sidebar-box search-form-wrap">
@@ -63,8 +57,7 @@ class ArticleSide extends React.Component {
 
 ArticleSide.propTypes = {
   article: PropTypes.object,
-  author: PropTypes.object,
-  navigate: PropTypes.func
+  author: PropTypes.object
 }
 
 export default ArticleSide

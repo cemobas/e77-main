@@ -22,11 +22,14 @@ const RelCategories = ({ tags }) => (
 
 class Article extends React.Component {
   
-  state = {
-    article: {
-      tags: []
-    },
-    author: {}
+  constructor(props){
+    super(props);
+    this.state = {
+      article: {
+        tags: []
+      },
+      author: {}
+    }
   }
 
   componentDidMount() {
@@ -51,7 +54,6 @@ class Article extends React.Component {
   render() {
     const article = this.state.article;
     const author = this.state.author;
-    const navigate = this.props.navigate;
 
     return (
       <div>
@@ -85,7 +87,7 @@ class Article extends React.Component {
                 {/**<Comments />*/}
               </div>
               {/**END main-content*/}
-              <ArticleSide article={article} author={author} navigate={navigate} />
+              <ArticleSide article={article} author={author} />
             </div>
           </div>
         </section>
@@ -96,8 +98,7 @@ class Article extends React.Component {
 }
 
 Article.propTypes = {
-  articleId: PropTypes.string,
-  navigate: PropTypes.func
+  articleId: PropTypes.string
 }
 
 export default Article
