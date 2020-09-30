@@ -5,8 +5,13 @@ import ArticleSide from "./ArticleSide";
 /** import Related from "./Related"; */
 import dateFormat from 'dateformat';
 import { getArticle, getAuthor } from '../api/postApi';
+<<<<<<< Updated upstream
 import { getArticleImgUrlById } from "../api/imageApi";
 import { addImages } from "../utils/textOps";
+=======
+import { getArticleImgUrl } from "../utils/ImageFetcher.js";
+import ReactHtmlParser from 'react-html-parser';
+>>>>>>> Stashed changes
 
 const RelCategories = ({ tags }) => (
   <p>Categories:&nbsp;
@@ -57,12 +62,16 @@ class Article extends React.Component {
 
     return (
       <div>
+<<<<<<< Updated upstream
         <div className="site-cover site-cover-sm same-height overlay single-page" style={{ backgroundImage: getArticleImgUrlById(article.index, 99) }}>
+=======
+        <div className="site-cover site-cover-sm same-height overlay single-page" style={{ backgroundImage: getArticleImgUrl(article._id, 0) }}>
+>>>>>>> Stashed changes
           <div className="container">
             <div className="row same-height justify-content-center">
               <div className="col-md-12 col-lg-10">
                 <div className="post-entry text-center">
-                  <span className="post-category text-white bg-success mb-3">{article.theme}</span>
+                  <span className="post-category text-white bg-success mb-3">{article.category}</span>
                   <h1 className="mb-4"><a href="#">{article.title}</a></h1>
                   <div className="post-meta align-items-center text-center">
                     <span className="d-inline-block mt-1">By {article.author}</span>
@@ -79,7 +88,11 @@ class Article extends React.Component {
             <div className="row blog-entries element-animate">
               <div className="col-md-12 col-lg-8 main-content">
                 <div className="post-content-body">
+<<<<<<< Updated upstream
                   {addImages(article.index, new String(article.content))}
+=======
+                  {ReactHtmlParser(article.content)}
+>>>>>>> Stashed changes
                 </div>
                 <div className="pt-5">
                   <RelCategories tags={article.tags} />

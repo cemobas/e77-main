@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
 import { getThemeData } from '../api/postApi';
 
@@ -12,17 +13,39 @@ const Trend = ({ trends }) => (
             })
         }
         {/** <li className="d-none d-lg-inline-block"><a href="#" className="js-search-toggle"><span className="icon-search"></span></a></li>*/}
+=======
+import PropTypes from 'prop-types';
+import { getCategoryData } from '../api/postApi';
+
+const Category = ({ categories, navigate }) => (
+    <ul className="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
+        {
+            categories.map((category, i) => {
+                return (
+                    <li key={i}><a onClick={navigate('Category', category._id, 0, 9)}>{category._id}</a></li>
+                )
+            })
+        }
+        {/**<li className="d-none d-lg-inline-block"><a href="#" className="js-search-toggle"><span className="icon-search"></span></a></li>*/}
+>>>>>>> Stashed changes
     </ul>
 )
 
 class Header extends React.Component {
+<<<<<<< Updated upstream
+=======
+    
+    state = {
+        categories: []
+    }
+>>>>>>> Stashed changes
 
     componentDidMount() {
-        getThemeData()
+        getCategoryData()
             .then((res) => {
-                console.log(`Retrieving themes for navbar...`);
+                console.log(`Retrieving categories for navbar...`);
                 this.setState({
-                    trends: res.data
+                    categories: res.data
                 });
             }).catch((error) => {
                 console.log(error.response);
@@ -63,7 +86,11 @@ class Header extends React.Component {
 
                             <div className="col-8 text-right">
                                 <nav className="site-navigation" role="navigation">
+<<<<<<< Updated upstream
                                     <Trend trends={this.state.trends} />
+=======
+                                    <Category categories={this.state.categories} navigate={navigate} />
+>>>>>>> Stashed changes
                                 </nav>
                                 <a href="#" className="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span className="icon-menu h3"></span></a>
                             </div>

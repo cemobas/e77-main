@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
+<<<<<<< Updated upstream
 import { Link } from "react-router-dom";
 import { getArticleImgUrlById } from "../api/imageApi";
 
 const NormalBox = ({ id, post, className }) => (
     <Link to={'/posts/'+post.index} className={className} style={{ backgroundImage: getArticleImgUrlById(post.index, 99) }}>
+=======
+import { getArticleImgUrl } from "../utils/ImageFetcher.js";
+
+const NormalBox = ({ id, post, className, openArticle }) => (
+    <a key={id} onClick={openArticle(post._id)} className={className} style={{ backgroundImage: getArticleImgUrl(post._id, 99) }}>
+>>>>>>> Stashed changes
         <div className="text">
             <h2>{post.short}</h2>
             <span className="date">{ dateFormat(post.date, "dddd, mmmm dS") }</span>
@@ -13,8 +20,13 @@ const NormalBox = ({ id, post, className }) => (
     </Link>
 )
 
+<<<<<<< Updated upstream
 const ExtensiveBox = ({ id, post }) => (
     <Link to={'/posts/'+post.index} className="h-entry img-5 h-100 gradient" style={{ backgroundImage: getArticleImgUrlById(post.index, 99) }}>
+=======
+const ExtensiveBox = ({ id, post, openArticle }) => (
+    <a key={id} onClick={openArticle(post._id)} className="h-entry img-5 h-100 gradient" style={{ backgroundImage: getArticleImgUrl(post._id, 99) }}>
+>>>>>>> Stashed changes
         <div className="text">
             <div className="post-categories mb-3">
                 <span className="post-category bg-danger">{post.tags[0]}</span>

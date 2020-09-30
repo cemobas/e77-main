@@ -19,8 +19,21 @@ export const getRecentData = (start, end) =>
     console.log(error.response);
   });
   
+<<<<<<< Updated upstream
 export const getThemeData = () =>
   axios.get(`${srvUri}/themes`, {})
+=======
+export const getRecentDataByCategory = (category, start, end) => 
+  axios.get(`${config.serverUrl}/latestPosts/${category}/${start}/${end}`, {})
+    .then((res) => {
+      return res;
+  }).catch((error) => {
+    console.log(error.response);
+  });
+  
+export const getCategoryData = () =>
+  axios.get(`${config.serverUrl}/categories`, {})
+>>>>>>> Stashed changes
     .then((res) => {
       return res;
   }).catch((error) => {

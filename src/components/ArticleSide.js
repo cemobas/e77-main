@@ -1,9 +1,17 @@
 import React from 'react';
+<<<<<<< Updated upstream
 import PropTypes from 'prop-types';
 /** import Popular from "./Popular"; */
 /** import Categories from "./Categories"; */
 /** import Tags from "./Tags"; */
 import { getAuthorImgUrlById } from "../api/imageApi";
+=======
+import PropTypes from 'prop-types'
+import { getAuthorImgUrl } from "../utils/ImageFetcher.js"
+import PopularPosts from "./PopularPosts"
+import Categories from "./Categories"
+import Tags from "./Tags"
+>>>>>>> Stashed changes
 
 class ArticleSide extends React.Component {
 
@@ -22,7 +30,11 @@ class ArticleSide extends React.Component {
           {/**END sidebar-box*/}
           <div className="sidebar-box">
             <div className="bio text-center">
+<<<<<<< Updated upstream
               <img src={getAuthorImgUrlById(author.nickname)} alt={author.nickname} className="img-fluid mb-5" />
+=======
+              <img src={getAuthorImgUrl(author._id)} alt="Image Placeholder" className="img-fluid mb-5" />
+>>>>>>> Stashed changes
               <div className="bio-body">
                 <h2>{author.name} {author.surname}</h2>
                 <p className="mb-4">{author.shortBio}</p>
